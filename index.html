@@ -337,7 +337,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 <script>
 var KA='pc_ak', KP='pc_projects', KPN='pc_pin';
-var MODEL='claude-sonnet-4-20250514';
+var MODEL='claude-sonnet-4-6';
 var AL_SECS=30*60;
 
 // OBFUSCATE
@@ -563,7 +563,8 @@ async function collectF(dir,files,depth){
       var f=await handle.getFile();
       var c=await f.text();
       files.push({name:name,content:c.slice(0,3000)});
-    } else if(handle.kind==='directory'&&depth<2){
+    } else if(handle.kind==='directory'&&depth<3){
+      // Always recurse into 'daily' folder, and up to depth 3 for others
       await collectF(handle,files,depth+1);
     }
   }
